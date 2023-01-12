@@ -8,6 +8,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   serverElements = [{type: 'server', name: 'testServer', content: 'Just a test'}];
 
+  onChangeFirst(){
+    this.serverElements[0].name = 'changed!'
+  }
+
+  onDestroyFirst(){
+    this.serverElements.splice(0,1);
+  }
+
   onServerAdded(serverData: {name: string, content: string}) {
     this.serverElements.push({
       type: 'server',
