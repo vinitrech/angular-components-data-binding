@@ -1,12 +1,12 @@
 import {
     AfterContentChecked,
     AfterContentInit, AfterViewChecked, AfterViewInit,
-    Component,
-    DoCheck,
+    Component, ContentChild,
+    DoCheck, ElementRef,
     Input,
     OnChanges, OnDestroy,
     OnInit,
-    SimpleChanges,
+    SimpleChanges, ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -27,6 +27,8 @@ import {
 export class ServerElementComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
     @Input('servElement') element: { type: string, name: string, content: string }; // parent components can access this property due to the decorator
     @Input('name') name: string;
+    @ViewChild('heading', {static: true}) heading: ElementRef; // if values is accessed inside ngOnInit, it's necessary to pass a 'static: true' parameter
+    @ContentChild('contentParagraph', {static: true}) contentParagraph: ElementRef; // if values is accessed inside ngOnInit, it's necessary to pass a 'static: true' parameter
 
     constructor() {
         console.log("constructor called")
@@ -39,6 +41,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
     ngOnInit(): void {
         console.log("ngOnInit called")
+        console.log(this.heading.nativeElement.textContent)
     }
 
     ngDoCheck() {
@@ -47,6 +50,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
     ngAfterContentInit() {
         console.log("ngAfterContentInit called")
+        console.log(this.contentParagraph.nativeElement.textContent)
     }
 
     ngAfterContentChecked() {
@@ -55,6 +59,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
     ngAfterViewInit() {
         console.log("ngAfterViewInit called")
+        console.log(this.heading.nativeElement.textContent)
     }
 
     ngAfterViewChecked() {

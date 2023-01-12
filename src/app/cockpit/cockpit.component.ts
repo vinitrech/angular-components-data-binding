@@ -11,7 +11,7 @@ export class CockpitComponent implements OnInit {
   @Output('bpCreated') blueprintCreated: EventEmitter<{name: string, content: string}> = new EventEmitter<{name: string, content: string}>();
   // newServerName = '';
   // newServerContent = '';
-  @ViewChild('serverContent', {static: true}) serverContentInput: ElementRef; // do not access this element to change its value through typescript, use string interpolation or property binding instead, for example
+  @ViewChild('serverContent') serverContentInput: ElementRef; // do not access this element to change its value through typescript, use string interpolation or property binding instead, for example
 
   constructor() { }
 
